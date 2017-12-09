@@ -8,10 +8,13 @@ class App extends Component {
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
-                    <h1 className="App-title">Welcome to Vetals React</h1>
+                    <input name="name" className="Inputs" id={"name"}/>
+                    <input name="surname" className="Inputs" id={"surname"}/>
+
                 </header>
                 <p className="App-intro">
-                    To get started, edit <code>src/App.js</code> and save to reload.
+                    Hello!, dear {document.getElementById("name")}
+                    <h2>It is {new Date().toLocaleTimeString()}.</h2>
                 </p>
             </div>
         );
