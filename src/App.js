@@ -2,22 +2,28 @@ import React, {Component} from 'react';
 import './App.css';
 
 class App extends Component {
+
     constructor(props) {
         super(props);
         this.state = {name: '', surname: '', dateOfBirthday: ''};
         this.handleChange = this.handleChange.bind(this);
     }
 
+    /**
+     * writes values to an object
+     * @param event
+     */
     handleChange(event) {
-        if (event.target.name === 'name') {
-            this.setState({name: event.target.value});
-        } else if (event.target.name === 'surname') {
-            this.setState({surname: event.target.value});
-        } else if (event.target.name === 'birthday') {
-            this.setState({dateOfBirthday: event.target.value});
-        }
+        let state = {};
+        state[event.target.name] = event.target.value;
+
+        this.setState(state);
     }
 
+    /**
+     * считает количество лет
+     * @returns {string}
+     */
     getAge() {
         let now = new Date();
         let yearNow = now.getFullYear();
@@ -41,16 +47,16 @@ class App extends Component {
     render() {
         return <div className="App">
             <header className="App-header">
-                <input name="name" className="Inputs" value={this.state.name} onChange={this.handleChange}/>
+                <input name="name" placeholder={'Имя'} className="Inputs" value={this.state.name} onChange={this.handleChange}/>
                 <br/>
-                <input name="surname" className="Inputs" value={this.state.surname} onChange={this.handleChange}/>
+                <input name="surname" placeholder={'Фамилия'} className="Inputs" value={this.state.surname} onChange={this.handleChange}/>
                 <br/>
-                <input name="birthday" className="Inputs" type="date" value={this.state.dateOfBirthday}
+                <input name="dateOfBirthday" className="Inputs" type="date" value={this.state.dateOfBirthday}
                        onChange={this.handleChange}/>
 
             </header>
             <div className="App-intro">
-                Hello!, dear {this.state.surname} {this.state.name}
+                Hello! {this.state.surname} {this.state.name}
                 <br/>
                 {this.getAge()}
             </div>
