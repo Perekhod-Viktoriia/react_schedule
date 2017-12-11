@@ -4,10 +4,8 @@ import './App.css';
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {name: '', surname: '', dateOfBirthday: '', age: ''};
-
+        this.state = {name: '', surname: '', dateOfBirthday: ''};
         this.handleChange = this.handleChange.bind(this);
-        // this.getAge = this.handleChange.bind(this);
     }
 
     handleChange(event) {
@@ -21,9 +19,23 @@ class App extends Component {
     }
 
     getAge() {
-        let now = (new Date()).getFullYear();
+        let now = new Date();
+        let yearNow = now.getFullYear();
         let year = this.state.dateOfBirthday.slice(0, 4);
-        return now - year;
+
+        let dateToCompare = new Date(this.state.dateOfBirthday);
+        dateToCompare.setFullYear(yearNow);
+
+        let timeDiff = dateToCompare.getTime() - now.getTime();
+        let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+        if (yearNow < year) {
+            return 'Not valid';
+        } else if (diffDays > 0) {
+            return `You age , ${ yearNow - year - 1}`
+        } else {
+            return `You age , ${ yearNow - year}`;
+        }
     }
 
     render() {
@@ -40,7 +52,7 @@ class App extends Component {
             <div className="App-intro">
                 Hello!, dear {this.state.surname} {this.state.name}
                 <br/>
-                You age {this.getAge()}
+                {this.getAge()}
             </div>
         </div>;
     }
