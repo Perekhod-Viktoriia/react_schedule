@@ -22,7 +22,8 @@
   to { transform: rotate(360deg); }
 }
 
-.Inputs{
-
+.Inputs {
+  margin: 5px;
+  width: 200px;
 }
 
